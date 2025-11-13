@@ -2,3 +2,5 @@ venv
 softech/__pychache__
 .idea
 product/migrations/__pychache__
+product/__pychache__
+db.sqlite3
