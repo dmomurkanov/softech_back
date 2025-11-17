@@ -1,10 +1,11 @@
 from django.db import models
 from decimal import Decimal
+from ckeditor.fields import RichTextField
+
 
 class Product(models.Model):
     name = models.CharField(verbose_name="Название", max_length=255)
     price = models.DecimalField(verbose_name="Цена", max_digits=10, decimal_places=2)
-    description = models.TextField(verbose_name="Описание", null=True)
     code = models.CharField(verbose_name="код товара", max_length=10,null=True)
     article = models.IntegerField(verbose_name="Артикул", null=True)
     discount = models.PositiveIntegerField(verbose_name="Процент скидки", null=True)
@@ -19,9 +20,15 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
 
+class ProductDescription(models.Model):
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    text = RichTextField("Описание")
+
+
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
     image = models.ImageField("фотография", upload_to="product")
 
     
+
         
