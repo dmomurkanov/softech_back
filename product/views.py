@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from rest_framework import viewsets, mixins
+from product.models import Product
+from product.serializers import CategorySerializer
 
-# Create your views here.
+
+class CategoryViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = Product.objects.all()
+    serializer_class = CategorySerializer
