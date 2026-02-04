@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from product.urls import router as product_router
+from product.views import CategoryViewSet
 
 main_router = routers.DefaultRouter()
 
