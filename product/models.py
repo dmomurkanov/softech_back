@@ -22,6 +22,7 @@ class SubCategory(models.Model):
 
 
 class Product(models.Model):
+    sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE, related_name='products', null=True)
     name = models.CharField(verbose_name="Название", max_length=255)
     price = models.DecimalField(verbose_name="Цена", max_digits=10, decimal_places=2)
     code = models.CharField(verbose_name="код товара", max_length=10,null=True)
