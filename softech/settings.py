@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     
     'ckeditor',
     'telebot',
+    'rest_framework',
 
     "product",
 ]
