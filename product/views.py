@@ -1,7 +1,7 @@
 from rest_framework import viewsets, mixins
 from product.models import Product, SubCategory, Category
-from product.serializers import CategorySerializer, SubCategorySerializer, CategoryDetailSerializer
-
+from product.serializers import CategorySerializer, SubCategorySerializer, CategoryDetailSerializer, ProductSerializer
+from django.db.models import Q
 
 class CategoryViewSet(
         mixins.ListModelMixin,
@@ -19,6 +19,18 @@ class CategoryViewSet(
 
 
 
-class SubCategoryViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
+class SubCategoryViewSet(viewsets.ModelViewSet):
     queryset = SubCategory.objects.all()
     serializer_class = SubCategorySerializer
+
+
+class ProductViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = Product.objects.filter(
+        Q(hit=True) | Q(popular=True) | Q(promotion=True)
+    )
+    serializer_class = ProductSerializer
+
+
+
+
+

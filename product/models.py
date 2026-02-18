@@ -30,7 +30,12 @@ class Product(models.Model):
     discount = models.PositiveIntegerField(verbose_name="Процент скидки", null=True)
     price_with_discount = models.DecimalField(verbose_name="Цена со скидкой", max_digits=10, decimal_places=2, null=True, blank=True)
     amount = models.PositiveIntegerField(verbose_name="количество", default=0)
- 
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
+
+    hit = models.BooleanField(default=False)
+    promotion = models.BooleanField(default=False)
+    popular = models.BooleanField(default=False)
+
     def __str__(self):
         return self.name
     
