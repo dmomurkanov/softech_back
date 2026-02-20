@@ -1,8 +1,7 @@
 from django.db.models import Q
 from rest_framework import serializers
 
-from product.models import Category, SubCategory, Product
-
+from product.models import Category, SubCategory, Product, ProductImage
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -69,3 +68,34 @@ class ProductSerializer(serializers.ModelSerializer):
         return Product.objects.filter(
             Q(hit=True) | Q(popular=True) | Q(promotion=True)
         ).count()
+
+
+class ProductImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImage
+        fields = ('id', 'image')
+
+
+class ProductDetailSerializer(serializers.ModelSerializer):
+    savings = serializers.SerializerMethodField()
+    images = ProductImageSerializer(many=True, read_only=True)
+    class Meta:
+        model = Product
+        fields = (
+            "id",
+            "name",
+            "price",
+            "discount",
+            "price_with_discount",
+            "code",
+            "article",
+            "savings",
+            "hit",
+            "promotion",
+            "popular",
+
+            "images",
+        )
+
+    def get_savings(self, obj):
+        pass

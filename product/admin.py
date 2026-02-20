@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, ProductImage, ProductDescription
+from .models import Product, ProductImage
 
 
 # Register your models here.
@@ -12,7 +12,3 @@ class ProductAdmin(admin.ModelAdmin):
 class ProductImageAdmin(admin.ModelAdmin):
     pass
 
-
-@admin.register(ProductDescription)
-class ProductDescriptionAdmin(admin.ModelAdmin):
-    pass
