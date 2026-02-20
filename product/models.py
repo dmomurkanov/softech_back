@@ -35,6 +35,7 @@ class Product(models.Model):
     hit = models.BooleanField(default=False)
     promotion = models.BooleanField(default=False)
     popular = models.BooleanField(default=False)
+    text = RichTextField("Описание", null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -44,13 +45,9 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
 
-class ProductDescription(models.Model):
-    product = models.OneToOneField(Product, on_delete=models.CASCADE)
-    text = RichTextField("Описание")
-
 
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, related_name='images')
     image = models.ImageField("фотография", upload_to="product")
 
     
