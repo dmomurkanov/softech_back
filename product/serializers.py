@@ -55,7 +55,8 @@ class ProductSerializer(serializers.ModelSerializer):
             "hit",
             "promotion",
             "popular",
-            "count"
+            "count",
+            "text"
         )
 
     def get_price(self, obj):
